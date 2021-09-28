@@ -6,30 +6,22 @@ import { GiphyFetch } from '@giphy/js-fetch-api'
 
 function App() {
 
-  // const GIF_API = 
   const gf = new GiphyFetch('qgcLvL4d5GSr9nrDEY8eGoeIlTEf78d8')
 
-  const fetchGifs = (offset: number) => gf.trending({ offset, limit: 2 })
-  // const fetchGifs = async(offset: number) => {
-  //    await gf.search('dogs', { sort: 'relevant', lang: 'es', limit: 10, type: 'stickers' })
-  // }
+  const fetchGifs = (offset) => gf.search(postText, { offset, limit: 2 })
+
 
   const [posts, setPosts] = useState({});
   const [postText, setPostText] = useState('');
   const [showPosts, setShowPosts] = useState(false)
-
-  const [gifs, setGifs] = useState();
-
+  const [gifs, setGif] = useState()
   const [lgShow, setLgShow] = useState(false);
 
   const submitPosts = () => {    
     posts.text = postText
+    // posts.gif = gifs
     setShowPosts(true)   
     setPostText('')
-  }
-
-  const searchGIFs = () => {
-
   }
 
   return (
@@ -39,7 +31,7 @@ function App() {
       <Card.Body>
         <div style={{ display: "flex" }}>
           <textarea  placeholder="Type Something" value = {postText} onChange = {event =>setPostText(event.target.value)}></textarea>
-          <Button className="mb-2"  variant="primary" size="sm" onClick={() => { setLgShow(true); searchGIFs () }}>Search GIF</Button>
+          <Button className="mb-2"  variant="primary" size="sm" onClick={() => { setLgShow(true)}}>Search GIF</Button>
             <Modal
               size="lg"
               show={lgShow}
@@ -48,7 +40,7 @@ function App() {
             >
               <Modal.Header closeButton>
                 <Modal.Body>
-                    <Grid width={700} columns={3} fetchGifs={fetchGifs} />
+                    <Grid width={700} columns={3} fetchGifs={fetchGifs} noLink={false} key={postText} />
                 </Modal.Body>
               </Modal.Header>
               <Modal.Body>...</Modal.Body>
@@ -65,9 +57,6 @@ function App() {
               </Card.Title>
             </Card.Body>
           </Card>}
-
-          
-
       </Card.Body>
     </Card>
     </>
