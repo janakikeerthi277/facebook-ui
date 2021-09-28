@@ -12,8 +12,9 @@ function App() {
   const [posts, setPosts] = useState({});
   const [postText, setPostText] = useState('');
   const [showPosts, setShowPosts] = useState(false)
-  const [gifs, setGif] = useState()
+  const [gifs, setGif] = useState({})
   const [lgShow, setLgShow] = useState(false);
+  const [showGif, setShowGif] = useState(false);
 
   const submitPosts = () => {    
     posts.text = postText
@@ -25,8 +26,9 @@ function App() {
 
   const fetchGifs = (offset) => {
     if(postText==='')  // if user does not input anything in the text area, search for trending gifs
+    {
       return gf.trending({ offset, limit: 2 })
-
+    }
     return gf.search(postText, { offset, limit: 2 })
   }
 
@@ -46,7 +48,7 @@ function App() {
             >
               <Modal.Header closeButton>
                 <Modal.Body>
-                    <Grid width={700} columns={3} fetchGifs={fetchGifs} noLink={true} key={postText} onGifClick={(gif, e) => {setLgShow(false); setGif(gif) }}/>
+                    <Grid width={700} columns={3} fetchGifs={fetchGifs} noLink={true} key={postText} onGifClick={(gif, e) => { setGif(gif) ; setLgShow(false); setShowGif(true) ; console.log(gif); console.log(gifs)}}/>
                 </Modal.Body>
               </Modal.Header>
               <Modal.Body>...</Modal.Body>
@@ -61,11 +63,12 @@ function App() {
               <Card.Title>
                 {posts.text}
               </Card.Title>
-              {/* {posts.gif} */}
+              
             </Card.Body>
           </Card>}
       </Card.Body>
     </Card>
+    {showGif && <img  src={gifs.url}/>}
     </>
   );
 }
