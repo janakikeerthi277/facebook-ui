@@ -8,7 +8,6 @@ function App() {
 
   const gf = new GiphyFetch('qgcLvL4d5GSr9nrDEY8eGoeIlTEf78d8')
 
-
   const [posts, setPosts] = useState({});
   const [postText, setPostText] = useState('');
   const [showPosts, setShowPosts] = useState(false)
@@ -18,9 +17,8 @@ function App() {
 
   const submitPosts = () => {    
     posts.text = postText
-    // posts.gif = gifs
-
-    setShowPosts(true)   
+    setShowPosts(true)  
+    setShowGif(true) ;  
     setPostText('')
   }
 
@@ -48,7 +46,7 @@ function App() {
             >
               <Modal.Header closeButton>
                 <Modal.Body>
-                    <Grid width={700} columns={3} fetchGifs={fetchGifs} noLink={true} key={postText} onGifClick={(gif, e) => { setGif(gif) ; setLgShow(false); setShowGif(true) ; console.log(gif); console.log(gifs)}}/>
+                    <Grid width={700} columns={3} fetchGifs={fetchGifs} noLink={true} key={postText} onGifClick={(gif, e) => {setGif(gif); setLgShow(false)}}/>
                 </Modal.Body>
               </Modal.Header>
               <Modal.Body>...</Modal.Body>
@@ -63,12 +61,11 @@ function App() {
               <Card.Title>
                 {posts.text}
               </Card.Title>
-              
+              {showGif && <img  src={gifs.images.fixed_width.url}/>}
             </Card.Body>
           </Card>}
       </Card.Body>
     </Card>
-    {showGif && <img  src={gifs.url}/>}
     </>
   );
 }
