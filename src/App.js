@@ -8,8 +8,6 @@ function App() {
 
   const gf = new GiphyFetch('qgcLvL4d5GSr9nrDEY8eGoeIlTEf78d8')
 
-  const fetchGifs = (offset) => gf.search(postText, { offset, limit: 2 })
-
 
   const [posts, setPosts] = useState({});
   const [postText, setPostText] = useState('');
@@ -20,8 +18,16 @@ function App() {
   const submitPosts = () => {    
     posts.text = postText
     // posts.gif = gifs
+
     setShowPosts(true)   
     setPostText('')
+  }
+
+  const fetchGifs = (offset) => {
+    if(postText==='')  // if user does not input anything in the text area, search for trending gifs
+      return gf.trending({ offset, limit: 2 })
+
+    return gf.search(postText, { offset, limit: 2 })
   }
 
   return (
@@ -40,7 +46,7 @@ function App() {
             >
               <Modal.Header closeButton>
                 <Modal.Body>
-                    <Grid width={700} columns={3} fetchGifs={fetchGifs} noLink={false} key={postText} />
+                    <Grid width={700} columns={3} fetchGifs={fetchGifs} noLink={true} key={postText} onGifClick={(gif, e) => {setLgShow(false); setGif(gif) }}/>
                 </Modal.Body>
               </Modal.Header>
               <Modal.Body>...</Modal.Body>
@@ -55,6 +61,7 @@ function App() {
               <Card.Title>
                 {posts.text}
               </Card.Title>
+              {/* {posts.gif} */}
             </Card.Body>
           </Card>}
       </Card.Body>
