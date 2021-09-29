@@ -10,7 +10,7 @@ function GifList({ gifData }) {
 
   const fetchGifs = (offset) => {
     if (postText === "") {
-      return gf.trending({ offset, limit: 2 });
+      return gf.search("company", { offset, limit: 2 });
     }
     return gf.search(postText, { offset, limit: 2 });
   };

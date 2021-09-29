@@ -1,5 +1,5 @@
 import { Button, Card, Container, Row } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 
 import GifList from "./GifList";
@@ -10,21 +10,48 @@ function Timeline() {
   const [posts, setPosts] = useState({});
   const [postText, setPostText] = useState("");
   const [showPosts, setShowPosts] = useState(false);
-  const [gifs, setGif] = useState({});
+  const [gifs, setGif] = useState();
   const [lgShow, setLgShow] = useState(false);
   const [showGif, setShowGif] = useState(false);
+  const [showStageGif, setShowStageGif] = useState(false);
+  const [stageGif, setStageGif] = useState();
 
   const submitPosts = () => {
+
     setPosts(postText);
     setShowPosts(true);
-    setShowGif(true);
+    setGif(stageGif);
+    if(gifs != "" && showStageGif==true)
+    {
+      setShowGif(true);
+    }
+    else
+    {
+      setShowGif(false);
+    }
+
+    setShowStageGif(false);
     setPostText("");
   };
 
   const gifData = (data) => {
-    setGif(data);
-    console.log(data);
+    setStageGif(data);
   };
+
+  useEffect(() => {
+    check(stageGif)
+  }, [stageGif]);
+
+  const check = (stageGif) => {
+    if(stageGif!="")
+    {
+      setShowStageGif(true)
+    }
+    else
+    {
+      setShowStageGif(false)
+    }
+  }
 
   return (
     <>
@@ -39,10 +66,14 @@ function Timeline() {
                   onChange={(event) => setPostText(event.target.value)}
                 ></textarea>
               </Row>
+              <br />
+              <Row xs={6} md={6}> 
+                {showStageGif && <img src={stageGif} />}
+              </Row>
             </Container>
             <br />
 
-            <Row xs={4} md={6} style={{ justifyContent: "right" }}>
+            <Row xs={6} md={6} style={{ justifyContent: "right" }}>
               <Button
                 variant="primary"
                 size="sm"
