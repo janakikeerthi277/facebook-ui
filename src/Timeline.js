@@ -162,7 +162,7 @@ function Timeline() {
               <Card>
                 <Card.Body>
                   <Card.Title>{posts.text}</Card.Title>
-                  {showGif && <img src={gifs.images.fixed_width.url} />}
+                  {showGif && <img src={gifs} />}
                 </Card.Body>
               </Card>
             )}

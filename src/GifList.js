@@ -9,12 +9,12 @@ import { GiphyFetch } from "@giphy/js-fetch-api";
 function GifList({gifData}) {
   const gf = new GiphyFetch("qgcLvL4d5GSr9nrDEY8eGoeIlTEf78d8");
 
-  const [posts, setPosts] = useState({});
+//   const [posts, setPosts] = useState({});
   const [postText, setPostText] = useState("");
   const [showPosts, setShowPosts] = useState(false);
-  const [gifs, setGif] = useState({});
+//   const [gifs, setGif] = useState({});
   const [lgShow, setLgShow] = useState(false);
-  const [showGif, setShowGif] = useState(false);
+//   const [showGif, setShowGif] = useState(false);
 
   const fetchGifs = (offset) => {
     if (postText === "") {
@@ -61,8 +61,8 @@ function GifList({gifData}) {
             noLink={true}
             key={postText}
             onGifClick={(gif, e) => {
-              setGif(gif);
-              gifData(gifs);
+            //   setGif(gif);
+              gifData(gif.images.fixed_width.url);
               setLgShow(false);
             }}
           />
