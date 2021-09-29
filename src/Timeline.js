@@ -1,11 +1,5 @@
-import {
-  Button,
-  Card,
-  Container,
-  Row
-} from "react-bootstrap";
-import { useState, useEffect } from "react";
-import { Grid } from "@giphy/react-components";
+import { Button, Card, Container, Row } from "react-bootstrap";
+import { useState } from "react";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 
 import GifList from "./GifList";
@@ -34,12 +28,10 @@ function Timeline() {
     return gf.search(postText, { offset, limit: 2 });
   };
 
-  const gifData = (data) =>{
-    
+  const gifData = (data) => {
     setGif(data);
-    console.log(data)
-  }
-  
+    console.log(data);
+  };
 
   return (
     <>
@@ -54,46 +46,6 @@ function Timeline() {
                   onChange={(event) => setPostText(event.target.value)}
                 ></textarea>
               </Row>
-
-              {/* <Row>
-                <Button
-                  className="mb-2"
-                  variant="primary"
-                  size="sm"
-                  onClick={() => {
-                    setLgShow(true);
-                    console.log(lgShow);
-                  }}
-                >
-                  Search GIF
-                </Button>
-              </Row> */}
-
-              {/* <Modal
-              size="lg"
-              show={lgShow}
-              onHide={() => setLgShow(false)}
-              aria-labelledby="example-modal-sizes-title-lg"
-            >
-              <Modal.Header closeButton>
-                <input type="text"/>
-              </Modal.Header>
-                <Modal.Body>
-                  <Grid
-                    width={700}
-                    columns={3}
-                    fetchGifs={fetchGifs}
-                    noLink={true}
-                    key={postText}
-                    onGifClick={(gif, e) => {
-                      setGif(gif);
-                      setLgShow(false);
-                    }}
-                  />
-                </Modal.Body>
-              
-              <Modal.Body>...</Modal.Body>
-            </Modal> */}
             </Container>
             <br />
 
@@ -105,8 +57,6 @@ function Timeline() {
               >
                 Only Me
               </Button>{" "}
-
-
               <Button
                 variant="primary"
                 size="sm"
@@ -117,9 +67,8 @@ function Timeline() {
               </Button>
             </Row>
             <br />
-            
+
             <Row lg={2}>
-              
               <GifList gifData={gifData}></GifList>{" "}
               <Button
                 className="mb-2"
@@ -154,9 +103,8 @@ function Timeline() {
               >
                 Tag Event
               </Button>
-  
             </Row>
-            
+
             <hr />
             {showPosts && (
               <Card>
