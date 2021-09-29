@@ -15,17 +15,10 @@ function Timeline() {
   const [showGif, setShowGif] = useState(false);
 
   const submitPosts = () => {
-    posts.text = postText;
+    setPosts(postText);
     setShowPosts(true);
     setShowGif(true);
     setPostText("");
-  };
-
-  const fetchGifs = (offset) => {
-    if (postText === "") {
-      return gf.trending({ offset, limit: 2 });
-    }
-    return gf.search(postText, { offset, limit: 2 });
   };
 
   const gifData = (data) => {
@@ -109,7 +102,7 @@ function Timeline() {
             {showPosts && (
               <Card>
                 <Card.Body>
-                  <Card.Title>{posts.text}</Card.Title>
+                  <Card.Title>{posts}</Card.Title>
                   {showGif && <img src={gifs} />}
                 </Card.Body>
               </Card>
