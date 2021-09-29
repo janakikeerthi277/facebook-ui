@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { Grid } from "@giphy/react-components";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 
-function GifList() {
+function GifList({gifData}) {
   const gf = new GiphyFetch("qgcLvL4d5GSr9nrDEY8eGoeIlTEf78d8");
 
   const [posts, setPosts] = useState({});
@@ -62,6 +62,7 @@ function GifList() {
             key={postText}
             onGifClick={(gif, e) => {
               setGif(gif);
+              gifData(gifs);
               setLgShow(false);
             }}
           />

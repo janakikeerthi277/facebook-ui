@@ -34,6 +34,13 @@ function Timeline() {
     return gf.search(postText, { offset, limit: 2 });
   };
 
+  const gifData = (data) =>{
+    
+    setGif(data);
+    console.log(data)
+  }
+  
+
   return (
     <>
       <Container style={{ display: "flex", justifyContent: "center" }}>
@@ -98,6 +105,8 @@ function Timeline() {
               >
                 Only Me
               </Button>{" "}
+
+
               <Button
                 variant="primary"
                 size="sm"
@@ -111,7 +120,7 @@ function Timeline() {
             
             <Row lg={2}>
               
-              <GifList></GifList>{" "}
+              <GifList gifData={gifData}></GifList>{" "}
               <Button
                 className="mb-2"
                 variant="outline-dark"
