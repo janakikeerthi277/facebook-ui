@@ -1,11 +1,11 @@
 import { Button, Card, Container, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { GiphyFetch } from "@giphy/js-fetch-api";
+
 
 import GifList from "./GifList";
 
 function Timeline() {
-  const gf = new GiphyFetch("qgcLvL4d5GSr9nrDEY8eGoeIlTEf78d8");
+  // const gf = new GiphyFetch("qgcLvL4d5GSr9nrDEY8eGoeIlTEf78d8");
 
   const [posts, setPosts] = useState({});
   const [postText, setPostText] = useState("");
@@ -21,7 +21,7 @@ function Timeline() {
     setPosts(postText);
     setShowPosts(true);
     setGif(stageGif);
-    if(gifs != "" && showStageGif==true)
+    if(gifs !== "" && showStageGif===true)
     {
       setShowGif(true);
     }
@@ -43,7 +43,7 @@ function Timeline() {
   }, [stageGif]);
 
   const check = (stageGif) => {
-    if(stageGif!="")
+    if(stageGif!=="")
     {
       setShowStageGif(true)
     }
@@ -68,7 +68,7 @@ function Timeline() {
               </Row>
               <br />
               <Row xs={6} md={6}> 
-                {showStageGif && <img src={stageGif} />}
+                {showStageGif && <img src={stageGif} alt=""/>}
               </Row>
             </Container>
             <br />
@@ -134,7 +134,7 @@ function Timeline() {
               <Card>
                 <Card.Body>
                   <Card.Title>{posts}</Card.Title>
-                  {showGif && <img src={gifs} />}
+                  {showGif && <img src={gifs} alt=""/>}
                 </Card.Body>
               </Card>
             )}
