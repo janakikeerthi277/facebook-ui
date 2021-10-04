@@ -1,11 +1,11 @@
 import { Button, Card, Container, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { GiphyFetch } from "@giphy/js-fetch-api";
+
 
 import GifList from "./GifList";
 
 function Timeline() {
-  const gf = new GiphyFetch("qgcLvL4d5GSr9nrDEY8eGoeIlTEf78d8");
+  // const gf = new GiphyFetch("qgcLvL4d5GSr9nrDEY8eGoeIlTEf78d8");
 
   const [postText, setPostText] = useState("");
   const [showPosts, setShowPosts] = useState(false);
@@ -39,7 +39,7 @@ function Timeline() {
   }, [stageGif]);
 
   const check = (stageGif) => {
-    if(stageGif!="")
+    if(stageGif!=="")
     {
       setShowStageGif(true)
     }
@@ -64,7 +64,7 @@ function Timeline() {
               </Row>
               <br />
               <Row xs={6} md={6}> 
-                {showStageGif && <img src={stageGif} />}
+                {showStageGif && <img src={stageGif} alt=""/>}
               </Row>
             </Container>
             <br />
