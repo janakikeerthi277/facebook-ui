@@ -7,29 +7,25 @@ import GifList from "./GifList";
 function Timeline() {
   const gf = new GiphyFetch("qgcLvL4d5GSr9nrDEY8eGoeIlTEf78d8");
 
-  const [posts, setPosts] = useState({});
   const [postText, setPostText] = useState("");
   const [showPosts, setShowPosts] = useState(false);
-  const [gifs, setGif] = useState();
   const [lgShow, setLgShow] = useState(false);
-  const [showGif, setShowGif] = useState(false);
   const [showStageGif, setShowStageGif] = useState(false);
   const [stageGif, setStageGif] = useState();
+  const [posts, setPosts] = useState([]);
+
+  let listOfPosts = posts;
 
   const submitPosts = () => {
 
-    setPosts(postText);
-    setShowPosts(true);
-    setGif(stageGif);
-    if(gifs != "" && showStageGif==true)
-    {
-      setShowGif(true);
-    }
-    else
-    {
-      setShowGif(false);
-    }
+    let newRecord = {};
+    newRecord['title'] = postText;
+    newRecord['body'] = stageGif;
+    listOfPosts.push(newRecord);
 
+    setPosts(listOfPosts);
+    setShowPosts(true);
+    setStageGif();
     setShowStageGif(false);
     setPostText("");
   };
@@ -133,8 +129,15 @@ function Timeline() {
             {showPosts && (
               <Card>
                 <Card.Body>
-                  <Card.Title>{posts}</Card.Title>
-                  {showGif && <img src={gifs} />}
+                  {
+                    posts.map(eachRecord => (
+                      <div>
+                        <hr/>
+                        <Card.Title key={eachRecord.title}>{eachRecord.title}</Card.Title>
+                        <img key={eachRecord.body} src={eachRecord.body} />
+                      </div>
+                    ))
+                  }
                 </Card.Body>
               </Card>
             )}
